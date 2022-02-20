@@ -143,7 +143,10 @@ class Iterater {
     }
     async run() {
         const projectNodeId = await this.getProjectId(this.config.owner, this.config.projectId);
-        const field = (await this.fetchFields(projectNodeId)).find(f => f.name === this.config.iterationTitle);
+        const field = (await this.fetchFields(projectNodeId)).find(f => {
+            core.debug(`Checking iteration id: ${f.id}, name: ${f.name} to match ${this.config.iterationTitle}`);
+            return f.name === this.config.iterationTitle;
+        });
         if (!field) {
             throw new Error(`No matching found for ${this.config.iterationTitle}`);
         }
