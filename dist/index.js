@@ -34,6 +34,7 @@ const core = __importStar(__nccwpck_require__(2186));
 const dayjs_1 = __importDefault(__nccwpck_require__(7401));
 const auth_app_1 = __nccwpck_require__(7541);
 const graphql_1 = __nccwpck_require__(8467);
+const util_1 = __nccwpck_require__(3837);
 class Iterater {
     config;
     #github;
@@ -137,7 +138,7 @@ class Iterater {
         const projectNodeId = await this.getProjectId(this.config.owner, this.config.projectId);
         const fields = await this.fetchFields(projectNodeId);
         /* eslint no-console: "off" */
-        console.log(fields[0].settings.configuration.iterations.map(i => i.start_date.format('YYYY-MM-DD')));
+        console.log(fields[0].settings.configuration.iterations.map(i => (0, util_1.inspect)(i)));
     }
 }
 exports.Iterater = Iterater;
