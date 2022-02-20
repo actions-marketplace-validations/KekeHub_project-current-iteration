@@ -133,11 +133,20 @@ class Iterater {
         const id = user.projectNext.id;
         return id;
     }
+    matchIteration(itrs, target) {
+        return itrs.find(itr => {
+            const startDate = (0, dayjs_1.default)(itr.start_date).tz(this.config.timezone);
+            const endDate = startDate.add(itr.duration, 'day');
+            return target.isAfter(startDate) && target.isBefore(endDate);
+        });
+    }
     async run() {
         const projectNodeId = await this.getProjectId(this.config.owner, this.config.projectId);
-        const fields = await this.fetchFields(projectNodeId);
-        /* eslint no-console: "off" */
-        console.log(fields[0].settings.configuration.iterations.map(i => typeof i.start_date));
+        const field = (await this.fetchFields(projectNodeId)).find(f => f.name === this.config.iterationTitle);
+        if (!field) {
+            throw new Error(`No matching found for ${this.config.iterationTitle}`);
+        }
+        this.matchIteration(field.settings.configuration.iterations, this.#date);
     }
 }
 exports.Iterater = Iterater;

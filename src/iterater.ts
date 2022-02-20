@@ -1,7 +1,7 @@
 import * as core from '@actions/core'
 import {Field, IteratorField} from './fields'
+import {Iteration, Settings} from './settings'
 import dayjs, {Dayjs} from 'dayjs'
-import {Settings} from './settings'
 import {createAppAuth} from '@octokit/auth-app'
 import {graphql} from '@octokit/graphql'
 
@@ -144,16 +144,31 @@ export class Iterater {
     return id
   }
 
+  private matchIteration(
+    itrs: Iteration[],
+    target: Dayjs
+  ): Iteration | undefined {
+    return itrs.find(itr => {
+      const startDate = dayjs(itr.start_date).tz(this.config.timezone)
+      const endDate = startDate.add(itr.duration, 'day')
+      return target.isAfter(startDate) && target.isBefore(endDate)
+    })
+  }
+
   async run(): Promise<void> {
     const projectNodeId = await this.getProjectId(
       this.config.owner,
       this.config.projectId
     )
-    const fields = await this.fetchFields(projectNodeId)
 
-    /* eslint no-console: "off" */
-    console.log(
-      fields[0].settings.configuration.iterations.map(i => typeof i.start_date)
+    const field = (await this.fetchFields(projectNodeId)).find(
+      f => f.name === this.config.iterationTitle
     )
+
+    if (!field) {
+      throw new Error(`No matching found for ${this.config.iterationTitle}`)
+    }
+
+    this.matchIteration(field.settings.configuration.iterations, this.#date)
   }
 }

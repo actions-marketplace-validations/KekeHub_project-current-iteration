@@ -1,5 +1,3 @@
-import {Dayjs} from 'dayjs'
-
 export type Settings = SingleSelect & IterationSelect
 
 export interface IterationSelect {
@@ -14,7 +12,7 @@ export interface Iteration {
   id: string
   title: string
   duration: number
-  start_date: Dayjs
+  start_date: string
   title_html: string
 }
 
