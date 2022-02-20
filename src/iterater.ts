@@ -4,7 +4,6 @@ import dayjs, {Dayjs} from 'dayjs'
 import {Settings} from './settings'
 import {createAppAuth} from '@octokit/auth-app'
 import {graphql} from '@octokit/graphql'
-import {inspect} from 'util'
 
 export interface Config {
   app: {
@@ -154,7 +153,7 @@ export class Iterater {
 
     /* eslint no-console: "off" */
     console.log(
-      fields[0].settings.configuration.iterations.map(i => inspect(i))
+      fields[0].settings.configuration.iterations.map(i => i.start_date)
     )
   }
 }
