@@ -59,12 +59,8 @@ class Iterater {
                 }
             });
         }
-        this.#date = this.config.date ? (0, dayjs_1.default)(this.config.date) : (0, dayjs_1.default)();
-        if (this.config.timezone) {
-            this.#date = this.#date.tz(this.config.timezone);
-            core.debug(`Configure timezone ${this.config.timezone}`);
-        }
-        this.#date = this.#date.hour(0).minute(0).second(0);
+        const date = this.config.date ? (0, dayjs_1.default)(this.config.date) : (0, dayjs_1.default)();
+        this.#date = date.hour(0).minute(0).second(0).tz(this.config.timezone);
         core.debug(`Targeted date is ${this.#date.format('YYYY-MM-DD')}`);
     }
     async fetchFields(projectId) {

@@ -39,6 +39,7 @@ inputs:
   timezone:
     required: false
     description: "Timezone to calculate the date"
+    default: Europe/London
 
   token:
     required: false

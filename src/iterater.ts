@@ -17,7 +17,7 @@ export interface Config {
   owner: string
   projectId: number
   shift: number
-  timezone?: string
+  timezone: string
   token: string
 }
 
@@ -48,13 +48,8 @@ export class Iterater {
       })
     }
 
-    this.#date = this.config.date ? dayjs(this.config.date) : dayjs()
-    if (this.config.timezone) {
-      this.#date = this.#date.tz(this.config.timezone)
-      core.debug(`Configure timezone ${this.config.timezone}`)
-    }
-
-    this.#date = this.#date.hour(0).minute(0).second(0)
+    const date = this.config.date ? dayjs(this.config.date) : dayjs()
+    this.#date = date.hour(0).minute(0).second(0).tz(this.config.timezone)
     core.debug(`Targeted date is ${this.#date.format('YYYY-MM-DD')}`)
   }
 
