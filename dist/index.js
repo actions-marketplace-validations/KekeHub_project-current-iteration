@@ -137,6 +137,7 @@ class Iterater {
         return itrs.find(itr => {
             const startDate = (0, dayjs_1.default)(itr.start_date).tz(this.config.timezone);
             const endDate = startDate.add(itr.duration, 'day');
+            core.debug(`Comparing iteration start_date ${startDate} < ${target} < ${endDate} for ${itr.title}`);
             return target.isAfter(startDate) && target.isBefore(endDate);
         });
     }
