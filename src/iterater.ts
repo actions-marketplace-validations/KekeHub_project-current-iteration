@@ -153,9 +153,7 @@ export class Iterater {
 
     /* eslint no-console: "off" */
     console.log(
-      fields[0].settings.configuration.iterations.map(i =>
-        i.start_date.format()
-      )
+      fields[0].settings.configuration.iterations.map(i => typeof i.start_date)
     )
   }
 }

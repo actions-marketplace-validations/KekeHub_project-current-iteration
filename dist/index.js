@@ -137,7 +137,7 @@ class Iterater {
         const projectNodeId = await this.getProjectId(this.config.owner, this.config.projectId);
         const fields = await this.fetchFields(projectNodeId);
         /* eslint no-console: "off" */
-        console.log(fields[0].settings.configuration.iterations.map(i => i.start_date.format()));
+        console.log(fields[0].settings.configuration.iterations.map(i => typeof i.start_date));
     }
 }
 exports.Iterater = Iterater;
