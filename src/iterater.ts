@@ -143,7 +143,7 @@ export class Iterater {
     itrs: Iteration[],
     target: Dayjs
   ): Iteration | undefined {
-    return itrs.find(itr => {
+    const index = itrs.findIndex(itr => {
       const startDate = dayjs(itr.start_date).tz(this.config.timezone)
       const endDate = startDate.add(itr.duration, 'day')
       core.debug(
@@ -151,6 +151,8 @@ export class Iterater {
       )
       return target.isAfter(startDate) && target.isBefore(endDate)
     })
+
+    return itrs[index + this.config.shift]
   }
 
   async run(): Promise<void> {
@@ -170,6 +172,21 @@ export class Iterater {
       throw new Error(`No matching found for ${this.config.iterationTitle}`)
     }
 
-    this.matchIteration(field.settings.configuration.iterations, this.#date)
+    const itr = this.matchIteration(
+      field.settings.configuration.iterations,
+      this.#date
+    )
+    if (!itr) {
+      throw new Error(
+        `No iteration found for title: ${this.config.iterationTitle} date: ${
+          this.#date
+        }`
+      )
+    }
+
+    core.setOutput('iteration-id', itr.id)
+    core.setOutput('iteration-title', itr.title)
+    core.setOutput('iteration-start-date', itr.start_date)
+    core.setOutput('project-id', projectNodeId)
   }
 }

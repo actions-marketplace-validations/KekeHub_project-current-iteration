@@ -130,12 +130,13 @@ class Iterater {
         return id;
     }
     matchIteration(itrs, target) {
-        return itrs.find(itr => {
+        const index = itrs.findIndex(itr => {
             const startDate = (0, dayjs_1.default)(itr.start_date).tz(this.config.timezone);
             const endDate = startDate.add(itr.duration, 'day');
             core.debug(`Comparing iteration start_date ${startDate} < ${target} < ${endDate} for ${itr.title}`);
             return target.isAfter(startDate) && target.isBefore(endDate);
         });
+        return itrs[index + this.config.shift];
     }
     async run() {
         const projectNodeId = await this.getProjectId(this.config.owner, this.config.projectId);
@@ -146,7 +147,14 @@ class Iterater {
         if (!field) {
             throw new Error(`No matching found for ${this.config.iterationTitle}`);
         }
-        this.matchIteration(field.settings.configuration.iterations, this.#date);
+        const itr = this.matchIteration(field.settings.configuration.iterations, this.#date);
+        if (!itr) {
+            throw new Error(`No iteration found for title: ${this.config.iterationTitle} date: ${this.#date}`);
+        }
+        core.setOutput('iteration-id', itr.id);
+        core.setOutput('iteration-title', itr.title);
+        core.setOutput('iteration-start-date', itr.start_date);
+        core.setOutput('project-id', projectNodeId);
     }
 }
 exports.Iterater = Iterater;

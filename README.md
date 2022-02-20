@@ -85,7 +85,7 @@ If any of these arguments are missing, the `${{ secrets.GITHUB_TOKEN }}` will ge
 | `app-integration-id` | ID of the GiHub App a.k.a App ID                                                                                                      | `number` | `false`  |                       |
 | `app-private-key`    | Private key of the GitHub App.                                                                                                        | `string` | `false`  |                       |
 | `date`               | Date to lookup the iteration                                                                                                          | `string` | `false`  | Now                   |
-| `iterator-title`     | Title of the iterator field e.g. `Sprint`                                                                                             | `string` | `true`   |                       |
+| `iteration-title`    | Title of the iterator field e.g. `Sprint`                                                                                             | `string` | `true`   |                       |
 | `project-id`         | ID (Number) of the project e.g.) `1`                                                                                                  | `number` | `true`   |                       |
 | `owner`              | Owner (organization or username) of the project. a.k.a `login`                                                                        |          |          |                       |
 | `shift`              | Index to shift. `1` means next iteration, `-1` means previous iteration.                                                              | `number` | `false`  | `0`                   |
