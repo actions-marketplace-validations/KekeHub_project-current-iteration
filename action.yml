@@ -18,9 +18,9 @@ inputs:
     required: false
     description: "Date to lookup for the iteration"
 
-  iterator-title:
+  iteration-title:
     required: true
-    description: "Title of the iterator"
+    description: "Title of the iteration"
 
   owner:
     required: false

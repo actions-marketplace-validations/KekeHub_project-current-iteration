@@ -13,4 +13,4 @@ jobs:
           app-integration-id: ${{ secrets.KEKEHUB_BOT_INTEGRATION_ID }}
           app-private-key: ${{ secrets.KEKEHUB_BOT_PRIVATE_KEY }}
           project-id: 1
-          iterator-title: Iterator
+          iteration-title: Iterator
