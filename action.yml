@@ -1,0 +1,54 @@
+name: "project-current-iterator"
+description: "Fetches current iterator information"
+author: "KekeHub"
+inputs:
+  app-installation-id:
+    required: false
+    description: "GitHub App installation ID"
+
+  app-integration-id:
+    required: false
+    description: "GitHub App integration ID a.k.a app ID"
+
+  app-private-key:
+    required: false
+    description: "GitHub App private key"
+
+  date:
+    required: false
+    description: "Date to lookup for the iteration"
+
+  iterator-title:
+    required: true
+    description: "Title of the iterator"
+
+  owner:
+    required: false
+    description: "Owner (organization or username) of the project owner"
+    default: ${{ github.repository_owner }}
+
+  project-id:
+    required: true
+    description: "ID(Number) of the project"
+
+  shift:
+    required: false
+    description: "Index to shift"
+    default: "0"
+
+  timezone:
+    required: false
+    description: "Timezone to calculate the date"
+
+  token:
+    required: false
+    description: "Credential to access to the repo to post the comment"
+    default: ${{ github.token }}
+
+runs:
+  using: "node12"
+  main: "dist/index.js"
+
+branding:
+  icon: "archive"
+  color: "orange"

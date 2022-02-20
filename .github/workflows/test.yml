@@ -1,0 +1,16 @@
+name: Test
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./
+        with:
+          app-installation-id: ${{ secrets.KEKEHUB_BOT_INSTALLATION_ID }}
+          app-integration-id: ${{ secrets.KEKEHUB_BOT_INTEGRATION_ID }}
+          app-private-key: ${{ secrets.KEKEHUB_BOT_PRIVATE_KEY }}
+          project-id: 1
+          iterator-title: Iterator
