@@ -16,7 +16,7 @@ async function run(): Promise<void> {
         privateKey: core.getInput('app-private-key') || ''
       },
       date: core.getInput('date'),
-      iterationTitle: core.getInput('iteration-id', {required: true}),
+      iterationTitle: core.getInput('iteration-title', {required: true}),
       owner: core.getInput('owner', {required: true}),
       projectId: parseInt(core.getInput('project-id', {required: true}), 10),
       shift: parseInt(core.getInput('shift'), 10),
