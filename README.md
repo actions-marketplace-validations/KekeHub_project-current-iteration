@@ -131,7 +131,7 @@ steps:
         app-private-key: ${{ secrets.MYBOT_PRIVATE_KEY }}
         fields: |
           Status=In Progress
-          Iteration=${{ steps.project-current-iteration.outputs.project-current-iteration.iterator-title }}
+          Iteration=${{ steps.project-current-iteration.outputs.iterator-title }}
           Date=2022/02/11
         project-id: 1
         project-item-id: PNI_lADOBfaB-d4AA0lSzzAk718
