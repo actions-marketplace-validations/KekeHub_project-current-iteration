@@ -115,7 +115,7 @@ on:
 
 steps:
     - name: Assign to project
-      uses: KeisukeYamashita/project-current-iteration@v1
+      uses: KekeHub/project-current-iteration@v1
       id: project-current-iteration
       with: 
         app-integration-id: ${{ secrets.MYBOT_INTEGRATION_ID }}
